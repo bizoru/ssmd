@@ -1,0 +1,2 @@
+collectd_status: "{{ lookup('env', 'COLLECTD_STATUS') | default('latest',true) }}"
+logstash_server: "{{ lookup('env', 'LOGSTASH_SERVER') | default('192.168.33.1',true) }}"

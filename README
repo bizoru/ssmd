@@ -1,0 +1,5 @@
+=== Intro
+ansible-playbook -i 'centos.local,' -u vagrant --extra-vars "hostname=centos.local" main.yml
+
+
+rrdtool cannot be used in centos by default it should't be in the collectd.conf template
