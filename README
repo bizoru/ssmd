@@ -1,10 +1,2 @@
-<<<<<<< HEAD
 # SISTEMA MODULAR DE ADQUISICIÓN, GESTIÓN Y VISUALIZACIÓN WEB DE MÉTRICAS DE DESEMPEÑO PARA CENTROS DE CÓMPUTO DE ALTO RENDIMIENTO
 CASO DE ESTUDIO: CECAD
-=======
-=== Intro
-ansible-playbook -i 'centos.local,' -u vagrant --extra-vars "hostname=centos.local" main.yml
-
-
-rrdtool cannot be used in centos by default it should't be in the collectd.conf template
->>>>>>> 944adeeba36147177ad39a288d3522074a0d3e2b
