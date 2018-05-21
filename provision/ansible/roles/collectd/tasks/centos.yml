@@ -1,0 +1,38 @@
+- name: Setup collectd for CentOS
+  debug:
+    msg: "This is CentOS"
+
+- name: Install EPEL Release
+  yum:
+    name: epel-release
+    state: present
+
+    update_cache: yes
+- name: Install collectd
+  yum:
+    name: collectd
+    state: "{{collectd_status}}"
+    update_cache: yes
+  when: collectd_status == "latest"
+
+- name: Uninstall collectd
+  yum:
+    name: collectd
+    state: "{{collectd_status}}"
+  when: collectd_status == "absent"
+
+- name: Uninstall collectd-core
+  yum:
+    name: collectd-core
+    state: "{{collectd_status}}"
+  when: collectd_status == "absent"
+
+- name: Setup configuration to report to logstash
+  template: src=templates/collectd.conf dest=/etc/collectd.conf
+  notify:
+    - Restart collectd
+
+- name: Setup collectd configuration
+  debug:
+    msg: "Configuration on place"
+  when: collectd_status == "present"

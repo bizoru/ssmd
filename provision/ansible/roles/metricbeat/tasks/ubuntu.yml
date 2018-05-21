@@ -1,0 +1,23 @@
+- name: Setup metricbeat for Ubuntu / Debian
+  debug:
+    msg: "Target computer OS is Ubuntu"
+
+- name: Install metricbeat
+  apt:
+    deb: https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-6.2.4-amd64.deb
+    update_cache: yes
+    install_recommends: yes
+
+- name: Setup configuration for metricbeat
+  template: src=templates/metricbeat.reference.yml dest=/etc/metricbeat/metricbeat.yml
+
+- name: Restart metricbeat service
+  service:
+    name: metricbeat
+    state: restarted
+
+- name: Install stress package
+  apt:
+    name: stress
+    update_cache: yes
+    state: present

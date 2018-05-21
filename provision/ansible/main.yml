@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars_files:
+    - "{{playbook_dir}}/vars/main.yml"
+  become: true
+  roles:
+    - { role: collectd, tags: ['collectd'] }
+    - { role: metricbeat, tags: ['metricbeat'] }

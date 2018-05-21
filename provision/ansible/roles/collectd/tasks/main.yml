@@ -1,0 +1,17 @@
+- name: Say hello
+  debug:
+    msg: "Hello World Ansible! {{ansible_distribution}}"
+
+- include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- include: centos.yml
+  when: ansible_distribution == 'CentOS'
+
+- name: Install package repository list according to the OS
+  debug:
+    msg: "Install"
+
+- name: Setup
+  debug:
+    msg: "Setup"

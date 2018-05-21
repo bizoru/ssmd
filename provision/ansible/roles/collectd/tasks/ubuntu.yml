@@ -1,0 +1,35 @@
+- name: Setup collectd for Ubuntu / Debian
+  debug:
+    msg: "This is Ubuntu! {{collectd_status}}"
+
+- name: Install collectd
+  apt:
+    name: collectd
+    state: "{{collectd_status}}"
+    update_cache: yes
+    install_recommends: yes
+  when: collectd_status == "latest"
+
+- name: Uninstall collectd
+  apt:
+    name: collectd
+    purge: yes
+    state: "{{collectd_status}}"
+  when: collectd_status == "absent"
+
+- name: Uninstall collectd-core
+  apt:
+    name: collectd-core
+    purge: yes
+    state: "{{collectd_status}}"
+  when: collectd_status == "absent"
+
+- name: Setup configuration to report to logstash
+  template: src=templates/collectd.conf dest=/etc/collectd/collectd.conf
+  notify:
+    - Restart collectd
+
+- name: Setup collectd configuration
+  debug:
+    msg: "Configuration on place"
+  when: collectd_status == "present"
