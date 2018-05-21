@@ -1,4 +1,4 @@
-##### SISTEMA MODULAR DE ADQUISICIÓN, GESTIÓN Y VISUALIZACIÓN WEB DE MÉTRICAS DE DESEMPEÑO PARA CENTROS DE CÓMPUTO DE ALTO RENDIMIENTO CASO DE ESTUDIO: CECAD
+### SISTEMA MODULAR DE ADQUISICIÓN, GESTIÓN Y VISUALIZACIÓN WEB DE MÉTRICAS DE DESEMPEÑO PARA CENTROS DE CÓMPUTO DE ALTO RENDIMIENTO CASO DE ESTUDIO: CECAD
 
 
 1. Inicialización de los nodos de prueba
@@ -8,12 +8,13 @@
   ```
 
 2. Aprovisionamiento de cada nodo con metricbeat
-   ```
-  cd provision/ansible
-  ./provision.sh 192.168.33.10 nodo-1
-  ./provision.sh 192.168.33.11 nodo-2
-  ./provision.sh 192.168.33.12 nodo-3
-  ./provision.sh 192.168.33.13 nodo-4
+
+  ```
+    cd provision/ansible
+    ./provision.sh 192.168.33.10 nodo-1
+    ./provision.sh 192.168.33.11 nodo-2
+    ./provision.sh 192.168.33.12 nodo-3
+    ./provision.sh 192.168.33.13 nodo-4
    ```
 3. Inicialización de elasticsearch y kibana
    ```
@@ -48,6 +49,7 @@
    ###### Disco
    ```
     stress -d 1 --hdd-bytes 200MB
+
    ```
 
 #### Archivo de Configuración Vagrantfile
