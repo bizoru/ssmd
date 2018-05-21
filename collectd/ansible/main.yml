@@ -1,0 +1,7 @@
+---
+- hosts: all
+  vars_files:
+    - "{{playbook_dir}}/vars/main.yml"
+  become: true
+  roles:
+    - collectd
