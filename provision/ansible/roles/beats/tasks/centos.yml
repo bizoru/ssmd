@@ -1,0 +1,45 @@
+- name: Setup metricbeat for CentOS
+  debug:
+    msg: "Target Computer OS is CentOS"
+
+- name: Install metricbeat package from Elastic Repository
+  yum:
+    name: https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-5.4.3-x86_64.rpm
+    state: present
+
+- name: Setup configuration for metricbeat
+  template: src=templates/metricbeat.reference.yml dest=/etc/metricbeat/metricbeat.yml
+
+- name: Restart metricbeat service
+  service:
+    name: metricbeat
+    state: restarted
+
+
+- name: 1.Check if EPEL repo is already configured.
+  stat: path={{ epel_repofile_path }}
+  register: epel_repofile_result
+
+- name: 2.Install EPEL repo.
+  yum:
+    name: "{{ epel_repo_url }}"
+    state: present
+  register: result
+  when: not epel_repofile_result.stat.exists
+
+- name: 3.Import EPEL GPG key.
+  rpm_key:
+    key: "{{ epel_repo_gpg_key_url }}"
+    state: present
+  when: not epel_repofile_result.stat.exists
+
+
+- name: Install stress package
+  yum:
+    name: stress
+    enablerepo: "epel"
+
+- name: Install htop package
+  yum:
+    name: htop
+    enablerepo: "epel"
